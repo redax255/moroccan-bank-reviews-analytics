@@ -78,7 +78,7 @@ Ce projet vise à centraliser, nettoyer et analyser les avis Google Maps sur les
     - Le classement des agences
     - Les points forts/faibles récurrents
   - Export des résultats sous forme de graphiques et visuels dans le dossier `dashboards/`
-  - Les dashboards sont accessibles via Looker Studio (liens à intégrer selon votre configuration)
+  - Les dashboards sont accessibles via Looker Studio (https://lookerstudio.google.com/reporting/1cda3e6d-9eba-4f49-ac0b-132287895caf/page/CXBNF)
 
 ### 6. Orchestration et automatisation
 - **Répertoire** : `airflow/`
