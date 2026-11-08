@@ -8,12 +8,13 @@ from psycopg2 import sql
 # Fonction pour obtenir la connexion à la base de données
 def get_db_connection():
     try:
+        # Credentials come from the environment (see .env.example).
         conn = psycopg2.connect(
-            host="localhost",
-            port="5432",
-            user="airflow-redax",
-            password="airflow_pass",
-            dbname="google_map_db"
+            host=os.getenv("POSTGRES_HOST", "localhost"),
+            port=os.getenv("POSTGRES_PORT", "5432"),
+            user=os.getenv("POSTGRES_USER"),
+            password=os.getenv("POSTGRES_PASSWORD"),
+            dbname=os.getenv("POSTGRES_DB", "google_map_db")
         )
         return conn
     except Exception as e:

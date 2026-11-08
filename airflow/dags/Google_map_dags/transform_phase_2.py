@@ -1,8 +1,11 @@
 """
 Transform Phase 2: Sentiment Analysis and Language Detection for Google Maps Reviews
 """
+import os
+
 import pandas as pd
 from sqlalchemy import create_engine
+from sqlalchemy.engine import URL
 from langdetect import detect
 import nltk
 from nltk.corpus import stopwords
@@ -133,7 +136,16 @@ def main():
     
     try:
         # Connect to PostgreSQL
-        db_engine = create_engine('postgresql://airflow-redax:airflow_pass@localhost:5432/google_map_db')
+        # Credentials come from the environment (see .env.example).
+        db_url = URL.create(
+            "postgresql",
+            username=os.getenv("POSTGRES_USER"),
+            password=os.getenv("POSTGRES_PASSWORD"),
+            host=os.getenv("POSTGRES_HOST", "localhost"),
+            port=int(os.getenv("POSTGRES_PORT", "5432")),
+            database=os.getenv("POSTGRES_DB", "google_map_db"),
+        )
+        db_engine = create_engine(db_url)
         connection = db_engine.connect()
         logging.info("Connected to database")
         

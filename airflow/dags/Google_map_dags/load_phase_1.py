@@ -1,14 +1,17 @@
+import os
+
 import psycopg2
 
 def get_db_connection():
     """Établit une connexion avec PostgreSQL."""
     try:
+        # Credentials come from the environment (see .env.example).
         conn = psycopg2.connect(
-            host="localhost",
-            port="5432",
-            user="postgres",
-            password="azerty",
-            dbname="Data_Warehouse_Project"
+            host=os.getenv("POSTGRES_HOST", "localhost"),
+            port=os.getenv("POSTGRES_PORT", "5432"),
+            user=os.getenv("POSTGRES_USER"),
+            password=os.getenv("POSTGRES_PASSWORD"),
+            dbname=os.getenv("POSTGRES_DB", "google_map_db")
         )
         return conn
     except Exception as e:
