@@ -1,21 +1,24 @@
-projet_dbt:
+# Copy to ~/.dbt/profiles.yml (the Airflow DAG runs dbt with --profiles-dir ~/.dbt).
+# Credentials are read from environment variables (see .env.example).
+# The profile name must match `profile:` in dbt_project.yml.
+datawarehouse_project:
   outputs:
     dev:
-      dbname: bank_reviews
-      host: localhost
-      pass: fatim
-      port: 5432
+      type: postgres
+      host: "{{ env_var('POSTGRES_HOST', 'localhost') }}"
+      port: "{{ env_var('POSTGRES_PORT', '5432') | as_number }}"
+      user: "{{ env_var('POSTGRES_USER') }}"
+      password: "{{ env_var('POSTGRES_PASSWORD') }}"
+      dbname: "{{ env_var('POSTGRES_DB', 'google_map_db') }}"
       schema: public
       threads: 4
-      type: postgres
-      user: fatim
     dev_dh:
-      dbname: bank_reviews
-      host: localhost
-      pass: fatim
-      port: 5432
+      type: postgres
+      host: "{{ env_var('POSTGRES_HOST', 'localhost') }}"
+      port: "{{ env_var('POSTGRES_PORT', '5432') | as_number }}"
+      user: "{{ env_var('POSTGRES_USER') }}"
+      password: "{{ env_var('POSTGRES_PASSWORD') }}"
+      dbname: "{{ env_var('POSTGRES_DB', 'google_map_db') }}"
       schema: star
       threads: 1
-      type: postgres
-      user: fatim
   target: dev_dh
