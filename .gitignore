@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+*_venv/
+
+# Secrets and local config
+.env
+.dbt/profiles.yml
+.dbt/.user.yml
+.user.yml
+
+# Airflow
+airflow/logs/
+airflow.db
+airflow.cfg
+webserver_config.py
+
+# Scraped data (not included in the repository)
+input/
+data/
+*.json
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
